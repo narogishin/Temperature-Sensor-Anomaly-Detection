@@ -1,28 +1,41 @@
 $(document).ready(function () {
   const ctx = document.getElementById("myChart").getContext("2d");
+  const ctx_2 = document.getElementById("myChart_2").getContext("2d");
 
   const myChart = new Chart(ctx, {
     type: "line",
     data: {
-      datasets: [{ label: "Temperature",  }],
-    },
+      datasets: [{ label: "Temperature",  },
+    ],},
     options: {
       borderWidth: 3,
       borderColor: ['rgba(255, 99, 132, 1)',],
     },
   });
 
-  function addData(label, data) {
-    myChart.data.labels.push(label);
-    myChart.data.datasets.forEach((dataset) => {
+  const myChart_2 = new Chart(ctx_2, {
+    type: "line",
+    data: {
+      datasets: [{ label: "Predicted Temperature",  },
+    ],},
+    options: {
+      borderWidth: 3,
+      borderColor: ['rgba(255, 99, 132, 1)',],
+    },
+  });
+
+
+  function addData(Chart, label, data) {
+    Chart.data.labels.push(label);
+    Chart.data.datasets.forEach((dataset) => {
       dataset.data.push(data);
     });
-    myChart.update();
+    Chart.update();
   }
 
-  function removeFirstData() {
-    myChart.data.labels.splice(0, 1);
-    myChart.data.datasets.forEach((dataset) => {
+  function removeFirstData(Chart) {
+    Chart.data.labels.splice(0, 1);
+    Chart.data.datasets.forEach((dataset) => {
       dataset.data.shift();
     });
   }
@@ -38,8 +51,18 @@ $(document).ready(function () {
     console.log(msg)
     // Show only MAX_DATA_COUNT data
     if (myChart.data.labels.length > MAX_DATA_COUNT) {
-      removeFirstData();
+      removeFirstData(myChart);
     }
-    addData(msg.date, msg.temp);
+    addData(myChart, msg.date, msg.temp);
+  });
+
+  socket.on("P_updateSensorData", function (msg) {
+    console.log("Received sensorData :: " + msg.date + " :: " + msg.pred);
+    console.log(msg)
+    // Show only MAX_DATA_COUNT data
+    if (myChart.data.labels.length > MAX_DATA_COUNT) {
+      removeFirstData(myChart_2);
+    }
+    addData(myChart_2, msg.date, msg.pred);
   });
 });

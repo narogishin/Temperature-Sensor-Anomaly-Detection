@@ -1,0 +1,25 @@
+client, addr = s.accept()
+
+        content = client.recv(32*2)
+        if len(content) == 0: continue
+
+        h = content.decode('utf-8').split(",")[0]
+        t = content.decode('utf-8').split(",")[1]
+        print(t)
+        info = {"date":get_current_datetime(), "temp":t}
+        socketio.emit('updateSensorData', info)
+        socketio.sleep(1)
+        client.close()
+
+######################################
+options: {
+      borderWidth: 3,
+      borderColor: ['rgba(255, 99, 132, 1)',],
+    },
+
+#######################
+<nav class="nav" tabindex="-1" onclick="this.focus()">
+      <div class="container">
+        <a class="pagename current" href="#">Test</a>
+      </div>
+    </nav>
