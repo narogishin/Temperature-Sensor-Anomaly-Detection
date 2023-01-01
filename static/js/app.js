@@ -24,6 +24,11 @@ $(document).ready(function () {
     },
   });
 
+  function SwitchModel () {
+    console.log("Hello World!");
+  }
+
+  object.onclick = function(){myScript};
 
   function addData(Chart, label, data) {
     Chart.data.labels.push(label);
