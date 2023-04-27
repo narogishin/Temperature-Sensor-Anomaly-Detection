@@ -22,7 +22,6 @@
     <div class="container-fluid p-2 bg-primary text-white text-center">
       <h1>Sensor Anomaly Detection</h1>
       <p>using ARIMA Model!</p>
-      <button onclick="SwitchModel()">Click me</button>
     </div>
 
     <!-- <button class="btn-close btn btn-sm">hello</button> -->
@@ -30,15 +29,31 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-6">
-          <h1>Sensor Value</h1>
+          <h1>Temperature Sensor Value</h1>
           <div class="chart-container">
             <canvas id="myChart" width="1000" height="600"></canvas>
           </div>
         </div>
         <div class="col-sm-6">
-          <h1>Predicted value</h1>
+          <h1>Temperature Predicted value</h1>
           <div class="chart-container">
             <canvas id="myChart_2" width="1000" height="600"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6">
+          <h1>Humidity Sensor Value</h1>
+          <div class="chart-container">
+            <canvas id="H_myChart" width="1000" height="600"></canvas>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <h1>Humidity Predicted value</h1>
+          <div class="chart-container">
+            <canvas id="H_myChart_2" width="1000" height="600"></canvas>
           </div>
         </div>
       </div>
